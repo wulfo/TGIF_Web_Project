@@ -4848,24 +4848,104 @@ var data = {
 
     
 
-function createTable(tbody, data, field) {  
-  for (var i = 0; i < data.length; i++) {
-    var row = document.createElement("tr");
-    tbody.appendChild(row);
-    
-    for (var j = 0; j < field.length; j++) {
-      var cell = document.createElement("td");
-    var texto = document.createTextNode(data[i][field[j]])
-      row.appendChild(cell);
-      cell.appendChild(texto)
-    }
-  }
-}
+//function createTable(tbody, data, field) {  
+//  for (var i = 0; i < data.length; i++) {
+//    var row = document.createElement("tr");
+//    tbody.appendChild(row);
+//      
+//
+//    
+//    for (var j = 0; j < field.length; j++) {
+//      var cell = document.createElement("td");
+//    var texto = document.createTextNode(data[i][field[j]])
+//    
+//        
+//      row.appendChild(cell);
+//      cell.appendChild(texto);
+//
+//    }
+//  }
+//}
+//
+//createTable(
+//  document.getElementById("senate-data"), data.results[0].members, 
+//  ["first_name", "party", "state", "seniority", "votes_with_party_pct"]
+//);
+//
+//
+//;
 
-createTable(
-  document.getElementById("senate-data"), data.results[0].members, 
+
+//APPOINTMENT WITH OTTAVIA---------
+function createTable(data, field) {
+    var tbody = document.getElementById("senate-data")
+    for (var i = 0; i < data.length; i++) {
+        var row = document.createElement("tr");
+     
+        var cell1 = document.createElement("td");
+        var cell2 = document.createElement("td");
+        var cell3 = document.createElement("td");
+        var cell4 = document.createElement("td");
+        var cell5 = document.createElement("td");
+        var nameLink = document.createElement('a'); 
+        
+        
+        nameLink.innerHTML = data[i].first_name;
+        cell2.innerHTML = data[i].party;
+        cell3.innerHTML = data[i].state;
+        cell4.innerHTML = data[i].seniority;
+        cell5.innerHTML = data[i].votes_with_party_pct;
+        
+        nameLink.setAttribute('href', data[i].url);
+        cell1.appendChild(nameLink);
+        
+        
+        row.appendChild(cell1);
+        row.appendChild(cell2);
+        row.appendChild(cell3);
+        row.appendChild(cell4);
+        row.appendChild(cell5);
+        
+        tbody.appendChild(row);;
+
+        }
+    }
+
+createTable(data.results[0].members,
   ["first_name", "party", "state", "seniority", "votes_with_party_pct"]
 );
+//
+//
+//;
+//-----FINAL APPOINTMENT OTTAVIA
 
-
-;
+//------------mysolutionasistida--------------
+//function createTable(tbody, data, field, urlInfo) {
+//  var texto;
+//
+//  for (var i = 0; i < data.length; i++) {
+//    var row = document.createElement("tr");
+//    tbody.appendChild(row);
+//
+//    for (var j = 0; j < field.length; j++) {
+//      var cell = document.createElement("td");
+//      if (field[j] === urlInfo.linkField) {
+//        cell.innerHTML = '<a href="' + data[i][urlInfo.urlField] + '">' +
+//          data[i][field[j]] + '</a>';
+//
+//      } else {
+//        cell.innerHTML = data[i][field[j]];
+//      }
+//      row.appendChild(cell);
+//    }
+//  }
+//}
+//
+//createTable(
+//  document.getElementById("senate-data"), data.results[0].members, 
+//  ["first_name", "party", "state", "seniority", "votes_with_party_pct"], 
+//  {
+//    linkField: "first_name",
+//    urlField: "url"
+//  }
+//);
