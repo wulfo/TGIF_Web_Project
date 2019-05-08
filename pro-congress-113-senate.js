@@ -4953,17 +4953,42 @@ function createTable(data, field) {
 createTable(data.results[0].members); //hemos eliminado los elementos anteriores para llamar la funcion, porque hemos creado esos elementos y dado contenido arriba.
 
 // FUNCION DROPDOWN
-function states() { 
-    var select = document.getElementById("stateList");
-	 
-	for (var i = 0; i < data.results[0].members.length; i++) {
-		var option = document.createElement("option");
-        option.innerHTML = data.results[0].members[i].state
+function states() { // funcion para crear la lista de State
+    var selectState = document.getElementById("stateList"); //identificamos el elemento donde ira
+    var statesArray = [] //creamos variable para el Array de states. que ahora esta vacio.
 
-		stateList.appendChild(option);
-	}
+    for (var a = 0; a < data.results[0].members.length; a++) { //corremos el lop para todo los datos de los miembros.
+
+        var allStates = data.results[0].members[a].state;//y el resultado de todos los miembros de state (.state) lo almacenamos en ela Variable
+        statesArray.sort().push(allStates) //metemos (push) esos resultados , ordenados alfabeticamente (sort) , dentro del statesArray, que ya no esta vacio.
+
+        //        option.innerHTML = state //estas dos lineas estaban aqui antes de escribir el codigo para los State repetidos. que ahora pasan al loop de abajo del todo. Cuando metemos los valores no repetidos.
+        //        stateList.appendChild(option);
+        var repetedStates = []; //creamos variable para los estados repetidos, que comienza vacia.
+
+        for (var i = 0; i < statesArray.length; i++) {//corremos loop para todos los statesArray (es decir, todos los elementos que pertenecen a .state)
+            for (var j = i + 1; j < statesArray.length; j++) {//anidamos otro lop con otra variable j, que empieza 1 elemento despues del anterior (=i+1).
+                if (statesArray[i] == statesArray[j]) {//y le damos la condicion de que si ambos resultados son iguales
+                    if (!repetedStates.includes(statesArray[i])) { //anidamos otra condicion, de que los que no esten repetidos pero estan incuildos en el primer array...
+                        repetedStates.push(statesArray[i]); //...esos elementos los meta dentro de la variable repetedStates.Es decir, el resultado es que metemos en la variable repetedStates, solo los que no estan repetidos y estan en el array (esto lo tengo confuso)
+                    }
+                }
+            }
+        }
+
+    }
+
+    for (var h = 0; h < repetedStates.length; h++) { //ahora corremos lop con los valores que tiene la variable repetedStes
+                var option = document.createElement("option"); //creamos en el html el elemento option, propio de los dropdown. 
+        option.innerHTML = repetedStates[h]//insertamos el resultado del loop anterior en el elemento option
+
+        stateList.appendChild(option);//anhadimos ese nuevo elemento dentro del elemento de html con id stateList.
+    }
 }
 states()
+
+
+
 
 
 // funtion for Filters   ----made with Ottavia-------
@@ -5013,8 +5038,6 @@ function filterMembers(boxesMarcadas, selectedState) {
     createTable(filteredMembers) 
 
 }
-
-
 
 
 
