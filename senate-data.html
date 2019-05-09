@@ -3,7 +3,13 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Document</title>
+   <!-- link and scripts para bootstrap-->
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <!-- fin bootstrap links and scripts -->
     <style>
         table,
         th,
@@ -14,8 +20,8 @@
 </head>
 
 <body>
-
-    <div class=checkboxes>
+    <div class = "container-fluid">
+    <div class="col-sm-4">
         <form class=form>
             <p> Filter by Party</p>
             <label><input type="checkbox" name="party" value="R" id="R" onchange="checkedBox()"> Republican </label>;
@@ -23,17 +29,17 @@
             <label><input type="checkbox" name="party" value="I" id="I" onchange="checkedBox()"> Independent </label>;
         </form>
     </div>
-    <div>
-                    <p>Filter by State:</p>
-                    <select onchange="checkedBox()" name="state" class = "allStates" id="stateList">
-                        <option value="all">All States</option>
-                        
-                    </select>
-                </div>
+    <div class="col-sm-4">
+        <p>Filter by State:</p>
+        <select onchange="checkedBox()" name="state" class="allStates" id="stateList">
+            <option value="all">All States</option>
+
+        </select>
+    </div>
 
 
-    <input type="button" value="Generate a table." onclick="createTable()">
-    <table style="width: 100%">
+    
+    <table style="width: 100%" class = "table">
         <thead>
             <tr>
                 <th>Name</th>
@@ -47,12 +53,10 @@
 
         </tbody>
     </table>
-
+    </div>
 
 
     <script type="text/javascript" src="pro-congress-113-senate.js"></script>
 
 
-</body>
-
-</html>
+</body></html>
