@@ -20763,11 +20763,11 @@ window.onload = function () {
         var nameLink = document.createElement('a');
 
 
-        nameLink.innerHTML = data[i].first_name;
+        nameLink.innerHTML = data[i].first_name + " " + (data[i].middle_name || " ") + " " + data[i].last_name;
         cell2.innerHTML = data[i].party;
         cell3.innerHTML = data[i].state;
         cell4.innerHTML = data[i].seniority;
-        cell5.innerHTML = data[i].votes_with_party_pct;
+        cell5.innerHTML = data[i].votes_with_party_pct+ "%";
 
         nameLink.setAttribute('href', data[i].url);
         cell1.appendChild(nameLink);
