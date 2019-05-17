@@ -4847,9 +4847,9 @@ let data = {
 
 //---------creating JSON object with statistics-------
 
-let statistics = {
+var statistics = {
     "totalDem": 0,
-    "tototalRep": 0,
+    "totalRep": 0,
     "totalInd": 0,
     "total": 0,
     "votesWithDem": 0,
@@ -4878,7 +4878,6 @@ var totalDem = 0;
 var totalRep = 0;
 var totalInd = 0;
 var total = 0;
-var arrayVotesWparty = [];
 var votesWithDem = 0;
 var votesWithRep = 0;
 var votesWithInd = 0;
@@ -4886,36 +4885,40 @@ var pctWithDem = 0;
 var pctWithRep = 0;
 var pctWithInd = 0;
 var totalPctWithParty = 0;
-
+var arrayMissedVotes = [];
+var arrayLoyal = [];
+var arrayVotesWparty = [];
 
 function calculateNumbers() { 
     
     function membersNumber() { 
 
     for (var i = 0; i < count; i++) {
-        partyType = (allMembers[i].party); //cambio var partyType por partyType. sigue funncionando
-        arrayVotesWparty = allMembers[i].votes_with_party_pct; //hago lo msimo con este array, para poder anhadir el [i]. funciona.
+        partyType = (allMembers[i].party); //cambio var=partyType por partyType. sigue funncionando
+        arrayVotesWparty[i] = allMembers[i].votes_with_party_pct; //hago lo msimo con este array, para poder anhadir el [i]. funciona.
+        arrayMissedVotes[i] = allMembers[i].missed_votes_pct;
+        
 
 
 
 
         if (partyType == "D") {
-            totalDem++;
+            totalDem++; //total members per party type
 
-            var votesWithDemNumber = parseFloat(arrayVotesWparty);
-            votesWithDem += votesWithDemNumber;
+            var votesWithDemNumber = parseFloat(arrayVotesWparty[i]); //turn array into number stored in var.
+            votesWithDem += votesWithDemNumber;//added every vote to var
 
         }
         if (partyType == "R") {
 
             totalRep++;
-            var votesWithRepNumber = parseFloat(arrayVotesWparty);
+            var votesWithRepNumber = parseFloat(arrayVotesWparty[i]);
             votesWithRep += votesWithRepNumber;
         }
         if (partyType == "I") {
 
             totalInd++;
-            var votesWithIndNumber = parseFloat(arrayVotesWparty);
+            var votesWithIndNumber = parseFloat(arrayVotesWparty[i]);
             votesWithInd += votesWithIndNumber;
         }
     }
@@ -4933,3 +4936,50 @@ var totalPctWithParty = ((votesWithDem + votesWithRep + votesWithInd)/total).toF
 var pctWithDem = (votesWithDem/totalDem).toFixed(2)+ "%";
 var pctWithRep = (votesWithRep/totalRep).toFixed(2)+ "%";
 var pctWithInd = (votesWithInd/totalInd).toFixed(2)+ "%";
+
+//store VAR values in JSON fields
+
+
+    statistics.totalDem = totalDem;
+    statistics.totalRep = totalRep;
+    statistics.totalInd = totalInd;
+    statistics.total = total;
+    statistics.votesWithDem = pctWithDem;
+    statistics.votesWithRep = pctWithRep;
+    statistics.votesWithInd = pctWithInd;
+    statistics.totalVotesWith = totalPctWithParty;
+    statistics.least_engaged = [],
+    statistics.most_engaged = [],
+    statistics.least_loyal = [],
+    statistics.most_loyal = [],
+    statistics.totalStates = []
+
+// calculate least engaged 
+
+var arrayLeastEngagedTotal = arrayMissedVotes.sort(function (a,b) {
+                                        return (a - b)
+                                        });
+
+// calculate 10% of all members
+
+  var tenPctOfLength = (allMembers.length * 10) / 100 
+  
+// calculate least engaged. Missed more  votes .
+  
+  var leastEngagedArrayTen = [];
+    for (i = 0; i < tenPctOfLength; i++) {
+            leastEngagedArrayTen.push(arrayLeastEngagedTotal[i]);
+        }
+    statistics.least_engaged = leastEngagedArrayTen;
+
+// calculate most engaged. MIssed less votes.
+
+ var arrayMostEngagedTotal = arrayMissedVotes.sort(function(a,b) {
+     return (b-a)
+ }); //sorting arrayMissedVotes the other way around.
+
+var mostEngagedArrayTen = [];
+ for (i = 0; i < tenPctOfLength; i++) {
+     mostEngagedArrayTen.push(arrayMostEngagedTotal[i]);
+ }
+statistics.most_engaged = mostEngagedArrayTen;
