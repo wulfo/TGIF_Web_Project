@@ -4983,3 +4983,29 @@ var mostEngagedArrayTen = [];
      mostEngagedArrayTen.push(arrayMostEngagedTotal[i]);
  }
 statistics.most_engaged = mostEngagedArrayTen;
+
+// Loyalty-------------------------
+
+var arrayLeastLoyalTotal = arrayVotesWparty.sort(function (a,b) {
+    return (a - b) 
+}); // create array witht the full list of votes w/party sorted from - to +
+    
+// create array for the 10pct least loyal and caclculate.
+var leastLoyalArrayTen = [] 
+
+for (i = 0; i < tenPctOfLength; i++) {
+    leastLoyalArrayTen.push(arrayLeastLoyalTotal[i]);
+}
+   statistics.least_loyal = leastLoyalArrayTen;                                        
+
+// create array witht the most loyal full list sorted from + to -
+var arrayMostLoyalTotal = arrayVotesWparty.sort(function (a,b) {
+    return (b - a) 
+});
+
+ var arrayMostLoyalTen = [];
+for (i = 0; i < tenPctOfLength; i++) {
+    arrayMostLoyalTen.push(arrayLeastLoyalTotal[i]);
+}
+
+statistics.most_loyal = arrayMostLoyalTen;
