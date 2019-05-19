@@ -1,3 +1,6 @@
+
+
+
 let data = {
     "status": "OK",
     "copyright": " Copyright (c) 2019 Pro Publica Inc. All Rights Reserved.",
@@ -4889,123 +4892,236 @@ var arrayMissedVotes = [];
 var arrayLoyal = [];
 var arrayVotesWparty = [];
 
-function calculateNumbers() { 
-    
-    function membersNumber() { 
+function calculateNumbers() {
 
-    for (var i = 0; i < count; i++) {
-        partyType = (allMembers[i].party); //cambio var=partyType por partyType. sigue funncionando
-        arrayVotesWparty[i] = allMembers[i].votes_with_party_pct; //hago lo msimo con este array, para poder anhadir el [i]. funciona.
-        arrayMissedVotes[i] = allMembers[i].missed_votes_pct;
-        
+    function membersNumber() {
 
+        for (var i = 0; i < count; i++) {
+            partyType = (allMembers[i].party); //cambio var=partyType por partyType. sigue funncionando
+            arrayVotesWparty[i] = allMembers[i].votes_with_party_pct; //hago lo msimo con este array, para poder anhadir el [i]. funciona.
+            arrayMissedVotes[i] = allMembers[i].missed_votes_pct;
 
 
 
-        if (partyType == "D") {
-            totalDem++; //total members per party type
 
-            var votesWithDemNumber = parseFloat(arrayVotesWparty[i]); //turn array into number stored in var.
-            votesWithDem += votesWithDemNumber;//added every vote to var
 
-        }
-        if (partyType == "R") {
+            if (partyType == "D") {
+                totalDem++; //total members per party type
 
-            totalRep++;
-            var votesWithRepNumber = parseFloat(arrayVotesWparty[i]);
-            votesWithRep += votesWithRepNumber;
-        }
-        if (partyType == "I") {
+                var votesWithDemNumber = parseFloat(arrayVotesWparty[i]); //turn array into number stored in var.
+                votesWithDem += votesWithDemNumber; //added every vote to var
 
-            totalInd++;
-            var votesWithIndNumber = parseFloat(arrayVotesWparty[i]);
-            votesWithInd += votesWithIndNumber;
+            }
+            if (partyType == "R") {
+
+                totalRep++;
+                var votesWithRepNumber = parseFloat(arrayVotesWparty[i]);
+                votesWithRep += votesWithRepNumber;
+            }
+            if (partyType == "I") {
+
+                totalInd++;
+                var votesWithIndNumber = parseFloat(arrayVotesWparty[i]);
+                votesWithInd += votesWithIndNumber;
+            }
         }
     }
-    }
-membersNumber()
-    
-   
+    membersNumber()
+
+
 }
 
 
 calculateNumbers()
 
 var total = (totalDem + totalRep + totalInd)
-var totalPctWithParty = ((votesWithDem + votesWithRep + votesWithInd)/total).toFixed(2)+ "%";
-var pctWithDem = (votesWithDem/totalDem).toFixed(2)+ "%";
-var pctWithRep = (votesWithRep/totalRep).toFixed(2)+ "%";
-var pctWithInd = (votesWithInd/totalInd).toFixed(2)+ "%";
+var totalPctWithParty = ((votesWithDem + votesWithRep + votesWithInd) / total).toFixed(2) + "%";
+var pctWithDem = (votesWithDem / totalDem).toFixed(2) + "%";
+var pctWithRep = (votesWithRep / totalRep).toFixed(2) + "%";
+var pctWithInd = (votesWithInd / totalInd).toFixed(2) + "%";
 
 //store VAR values in JSON fields
 
 
-    statistics.totalDem = totalDem;
-    statistics.totalRep = totalRep;
-    statistics.totalInd = totalInd;
-    statistics.total = total;
-    statistics.votesWithDem = pctWithDem;
-    statistics.votesWithRep = pctWithRep;
-    statistics.votesWithInd = pctWithInd;
-    statistics.totalVotesWith = totalPctWithParty;
-    statistics.least_engaged = [],
-    statistics.most_engaged = [],
-    statistics.least_loyal = [],
-    statistics.most_loyal = [],
-    statistics.totalStates = []
+statistics.totalDem = totalDem;
+statistics.totalRep = totalRep;
+statistics.totalInd = totalInd;
+statistics.total = total;
+statistics.votesWithDem = pctWithDem;
+statistics.votesWithRep = pctWithRep;
+statistics.votesWithInd = pctWithInd;
+statistics.totalVotesWith = totalPctWithParty;
 
-// calculate least engaged 
 
-var arrayLeastEngagedTotal = arrayMissedVotes.sort(function (a,b) {
-                                        return (a - b)
-                                        });
 
-// calculate 10% of all members
 
-  var tenPctOfLength = (allMembers.length * 10) / 100 
-  
-// calculate least engaged. Missed more  votes .
-  
-  var leastEngagedArrayTen = [];
-    for (i = 0; i < tenPctOfLength; i++) {
-            leastEngagedArrayTen.push(arrayLeastEngagedTotal[i]);
-        }
-    statistics.least_engaged = leastEngagedArrayTen;
 
-// calculate most engaged. MIssed less votes.
 
- var arrayMostEngagedTotal = arrayMissedVotes.sort(function(a,b) {
-     return (b-a)
- }); //sorting arrayMissedVotes the other way around.
 
-var mostEngagedArrayTen = [];
- for (i = 0; i < tenPctOfLength; i++) {
-     mostEngagedArrayTen.push(arrayMostEngagedTotal[i]);
- }
-statistics.most_engaged = mostEngagedArrayTen;
 
-// Loyalty-------------------------
 
-var arrayLeastLoyalTotal = arrayVotesWparty.sort(function (a,b) {
-    return (a - b) 
-}); // create array witht the full list of votes w/party sorted from - to +
-    
-// create array for the 10pct least loyal and caclculate.
-var leastLoyalArrayTen = [] 
+//Calculate 10% MOST LOYAL ------------
 
-for (i = 0; i < tenPctOfLength; i++) {
+//create array with all members order according to Votes_with_party_pct descending
+var arrayMostLoyalTotal = [];
+
+
+arrayMostLoyalTotal = allMembers.sort(function (a, b) {
+    return b.votes_with_party_pct - a.votes_with_party_pct;
+})
+console.log(arrayMostLoyalTotal)
+
+var tenPctOfAll = (arrayMostLoyalTotal.length * 10) / 100 //get 10% number of all members 
+
+console.log(tenPctOfAll)
+
+var mostLoyalArrayTen = [];
+
+for (i = 0; i < tenPctOfAll; i++) {
+    mostLoyalArrayTen.push(arrayMostLoyalTotal[i]);
+} //push array with 10% members into var 
+
+console.log(arrayMostLoyalTotal)
+console.log(mostLoyalArrayTen)
+
+
+
+//// calculate 10% LEAST LOYAL -----------
+
+var arrayLeastLoyalTotal = []
+
+
+var arrayLeastLoyalTotal = arrayMostLoyalTotal.reverse(); // reverse array MostEngaged order to get the array with least Engaged
+console.log(arrayLeastLoyalTotal);
+
+var leastLoyalArrayTen = [];
+for (i = 0; i < tenPctOfAll; i++) {
     leastLoyalArrayTen.push(arrayLeastLoyalTotal[i]);
 }
-   statistics.least_loyal = leastLoyalArrayTen;                                        
+console.log(leastLoyalArrayTen);
 
-// create array witht the most loyal full list sorted from + to -
-var arrayMostLoyalTotal = arrayVotesWparty.sort(function (a,b) {
-    return (b - a) 
-});
+var arrayMostLoyalTotal = arrayMostLoyalTotal.reverse()
+console.log(arrayMostLoyalTotal)
 
- var arrayMostLoyalTen = [];
-for (i = 0; i < tenPctOfLength; i++) {
-    arrayMostLoyalTen.push(arrayLeastLoyalTotal[i]);
+// -------_FIN LOYAL 
+
+// Calculate 10% MOST ENGAGED---------
+
+var arrayMostEngagedTotal = [];
+
+arrayMostEngagedTotal = allMembers.sort(function (a, b) {
+    return a.missed_votes_pct - b.missed_votes_pct;
+})
+console.log(arrayMostEngagedTotal)
+
+var mostEngagedArrayTen = [];
+
+for (i = 0; i < tenPctOfAll; i++) {
+    mostEngagedArrayTen.push(arrayMostEngagedTotal[i]);
+} //push array with 10% members into var 
+
+console.log(arrayMostEngagedTotal)
+console.log(mostEngagedArrayTen)
+ //push it into my JSON key
+
+
+// CAlculate 10% LEAST ENGAGED---------
+
+var leastEngagedArrayTen = [];
+for (i = allMembers.length - 1; i > allMembers.length - tenPctOfAll - 1; i--) {
+    leastEngagedArrayTen.push(arrayMostEngagedTotal[i]);
+} //other way to reverse array (at the same time we calculate 10%). Need clarification(see link in javascrip bookmarks folder) (aun asi se siguen cambiando los valores anteriores en los console.logs ,,aunque los de statistics estan bien...)
+console.log(leastEngagedArrayTen)
+
+
+//---Store Loyal & Engaged Values in JSON-----
+
+statistics.most_loyal = mostLoyalArrayTen;
+statistics.least_loyal = leastLoyalArrayTen;
+statistics.most_engaged = mostEngagedArrayTen;
+statistics.least_engaged = leastEngagedArrayTen
+
+//Fill glance table ------
+
+function glanceTable() {
+
+    document.getElementById("cellR1").innerHTML = statistics.totalRep;
+    document.getElementById("cellR2").innerHTML = statistics.votesWithRep;
+    document.getElementById("cellD1").innerHTML = statistics.totalDem;
+    document.getElementById("cellD2").innerHTML = statistics.votesWithDem;
+    document.getElementById("cellI1").innerHTML = statistics.totalInd;
+    document.getElementById("cellI2").innerHTML = statistics.votesWithInd;
+    document.getElementById("cellT1").innerHTML = statistics.total;
+    document.getElementById("cellT2").innerHTML = statistics.totalVotesWith;
+
 }
 
-statistics.most_loyal = arrayMostLoyalTen;
+glanceTable()
+
+
+
+
+// fill least engage table ----------
+
+
+
+function leastEngagedTable() {
+    var tbody = document.getElementById("leastEngaged")
+     tbody.innerHTML = '';
+    var statisticsLE = statistics.least_engaged;
+    
+    for (i = 0; i < statisticsLE.length; i++ ) {
+        var row = document.createElement("tr");
+        var cell1 = document.createElement("td");
+        var cell2 = document.createElement("td");
+        var cell3 = document.createElement("td");
+        var nameLink = document.createElement('a');
+        
+        nameLink.innerHTML = statisticsLE[i].first_name + " " + (statisticsLE[i].middle_name || " ") + " " + statisticsLE[i].last_name;
+        
+        
+        cell2.innerHTML = statisticsLE[i].missed_votes;
+        cell3.innerHTML = statisticsLE[i].missed_votes_pct + "%"; //DUDA inicialmente ponia =allmembers[i].first_name, etc.. y listaba los de Most Engage
+        
+        nameLink.setAttribute('href', statisticsLE[i].url);
+        cell1.appendChild(nameLink);
+        row.appendChild(cell1);
+        row.appendChild(cell2);
+        row.appendChild(cell3);
+        
+        tbody.appendChild(row);
+            
+        
+    }
+}
+leastEngagedTable()
+
+function mostEngagedTable() {
+    var tbody = document.getElementById("MostEngaged")
+    
+    var statisticsME = statistics.most_engaged;
+    
+    for (i = 0; i < statisticsME.length; i++ ) {
+        var row = document.createElement("tr");
+        var cell1 = document.createElement("td");
+        var cell2 = document.createElement("td");
+        var cell3 = document.createElement("td");
+        var nameLink = document.createElement('a');
+        
+        nameLink.innerHTML = statisticsME[i].first_name + " " + (statisticsME[i].middle_name || " ") + " " + statisticsME[i].last_name;
+        cell2.innerHTML = statisticsME[i].missed_votes;
+        cell3.innerHTML = statisticsME[i].missed_votes_pct + "%"; 
+        
+        nameLink.setAttribute('href', statisticsME[i].url);
+        cell1.appendChild(nameLink);
+        row.appendChild(cell1);
+        row.appendChild(cell2);
+        row.appendChild(cell3);
+        
+        tbody.appendChild(row);
+            
+        
+    }
+}
+mostEngagedTable()
+
