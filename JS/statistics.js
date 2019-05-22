@@ -4,7 +4,7 @@ console.log(where)
 if (where == "/senate_attendance_statistics.html" || where == "/senate_loyalty_statistics.html") {
     where = "senate";
 }
-if (where == "/house_attendance_statistics.html" || where == "/house_loyalty_statistics.html") {
+if (where == "/House_attendance_statistics.html" || where == "/house_loyalty_statistics.html") {
     where = "house";
 }
 //
@@ -271,7 +271,7 @@ function allFunctions(allMembers) {
                 leastEngagedTable();
                 mostEngagedTable();
                 break;
-            case ("/house_attendance_statistics.html") :
+            case ("/House_attendance_statistics.html") :
                 console.log("2");
                 leastEngagedTable();
                 mostEngagedTable();
