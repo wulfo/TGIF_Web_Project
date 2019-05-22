@@ -1,0 +1,120 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+/*---------TABLA-----------*/
+
+tr th {
+    text-align: center;
+}
+
+.table1 {
+    width: 46%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.table2 {
+    width: 47%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    
+}
+
+
+
+.table3 {
+    width: 47%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+    
+
+
+/*-----------LOGOS----------*/
+
+.logo {
+    width: 150px;
+    height: 150px;
+}
+
+.barra {
+    width: 200px;
+    height: 200px;
+    align-self: center;
+
+}
+
+/*---------HEADER FLEX BOX---------*/
+header {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.email {
+    width: 10%;
+    align-self: flex-end;
+
+}
+
+.titleh1 {
+    width: 80%;
+}
+
+/*---------CONTENT FLEX BOX---------*/
+
+#content1 {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.content2 {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+}
+
+.text1 {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+
+}
+
+section {
+    width: 80%;
+}
+
+.checkboxes {
+    width: 40%;
+
+}
+
+.dropdownFilter {
+    width: 40%;
+}
+
+.line {
+    width: 100%;
+    height: 1px;
+    border: 0.5px solid rgba(221, 221, 221, 0.79);
+}
