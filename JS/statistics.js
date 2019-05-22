@@ -265,7 +265,7 @@ function allFunctions(allMembers) {
                 leastEngagedTable();
                 mostEngagedTable();
                 break;
-            case ("/House_attendance_statistics.html") :
+            case ("/house_attendance_statistics.html") :
                 console.log("2");
                 leastEngagedTable();
                 mostEngagedTable();
