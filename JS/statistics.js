@@ -1,10 +1,10 @@
 var where = window.location.pathname;
 
 console.log(where)
-if (where == "/Senate_attendance_statistics.html" || where == "/Senate_loyalty_statistics.html") {
+if (where.includes("enate")) {
     where = "senate";
 }
-if (where == "/House_attendance_statistics.html" || where == "/House_loyalty_statistics.html") {
+if (where.includes("ouse")) {
     where = "house";
 }
 
@@ -260,22 +260,22 @@ function allFunctions(allMembers) {
         
         
         switch (window.location.pathname) {
-            case ("/Senate_attendance_statistics.html" ) :
+            case ("/senate_attendance_statistics.html" ) :
                 console.log("1");
                 leastEngagedTable();
                 mostEngagedTable();
                 break;
-            case ("/House_attendance_statistics.html") :
+            case ("/house_attendance_statistics.html") :
                 console.log("2");
                 leastEngagedTable();
                 mostEngagedTable();
                 break;
-            case ("/Senate_loyalty_statistics.html") :
+            case ("/senate_loyalty_statistics.html") :
                 console.log("3");
                 leastLoyalTable();
                 mostLoyalTable();
                 break;
-            case ("/House_loyalty_statistics.html") :
+            case ("/house_loyalty_statistics.html") :
                 console.log("4");
                 leastLoyalTable();
                 mostLoyalTable();
