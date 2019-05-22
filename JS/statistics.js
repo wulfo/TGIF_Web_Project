@@ -1,13 +1,19 @@
 var where = window.location.pathname;
 
 console.log(where)
-if (where.includes("enate")) {
+if (where == "/senate_attendance_statistics.html" || where == "/senate_loyalty_statistics.html") {
     where = "senate";
 }
-if (where.includes("ouse")) {
+if (where == "/house_attendance_statistics.html" || where == "/house_loyalty_statistics.html") {
     where = "house";
 }
-
+//
+//if (where.includes("senate")) {
+//    where = "senate";
+//}
+//if (where.includes("house")) {
+//    where = "house";
+//}
 
 //
 //var allMembers = []
