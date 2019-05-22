@@ -5,58 +5,108 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Document</title>
-   <!-- link and scripts para bootstrap-->
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <!-- fin bootstrap links and scripts -->
-    <style>
-        table,
-        th,
-        td {
-            border: 1px solid black;
-        }
-    </style>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+
+
+
 </head>
 
+
 <body>
-    <div class = "container-fluid">
-    <div class="col-sm-4">
-        <form class=form>
-            <p> Filter by Party</p>
-            <label><input type="checkbox" name="party" value="R" id="R" > Republican </label>;
-            <label><input type="checkbox" name="party" value="D" id="D" > Democrat </label>
-            <label><input type="checkbox" name="party" value="I" id="I" > Independent </label>;
-        </form>
+    <div class="container panel panel-default">
+
+        <header>
+
+            <img class=src>
+
+            <img class="logo" src="TGIF_logo_.png">
+
+            <div class="email">
+                <a href="#">
+                    <span class="glyphicon glyphicon-envelope"></span>
+                </a>
+
+                <a href="mailto:info@tgif.net">info@tgif.net</a>
+
+
+            </div>
+        </header>
+        <nav class=" panel-heading navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">TGIF</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li><a href="home.html">Home</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Congress 113<span class="caret"></span></a>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="senate-data.html">Senate</a></li>
+                            <li><a href="house-data.html">House</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown active">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Attendance<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="Senate_attendance_statistics.html">Senate</a></li>
+                            <li><a href="House_attendance_statistics.html">House</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Party Loyalty<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="Senate_loyalty_statistics.html">Senate</a></li>
+                            <li><a href="House_loyalty_statistcs.html">House</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container-fluid">
+            <div class="col-sm-4">
+                <form class=form>
+                    <p> Filter by Party</p>
+                    <label><input type="checkbox" name="party" value="R" id="R"> Republican </label>;
+                    <label><input type="checkbox" name="party" value="D" id="D"> Democrat </label>
+                    <label><input type="checkbox" name="party" value="I" id="I"> Independent </label>;
+                </form>
+            </div>
+            <div class="col-sm-4">
+                <p>Filter by State:</p>
+                <select name="state" class="allStates" id="stateList">
+                    <option value="all">All States</option>
+
+                </select>
+            </div>
+
+
+
+            <table style="width: 100%" class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Party</th>
+                        <th>State</th>
+                        <th>Years in Office</th>
+                        <th>% Votes w/ Party</th>
+                    </tr>
+                </thead>
+                <tbody id="senate-data">
+
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div class="col-sm-4">
-        <p>Filter by State:</p>
-        <select name="state" class="allStates" id="stateList">
-            <option value="all">All States</option>
 
-        </select>
-    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="pro-congress-113-senate.js"></script>
 
 
-    
-    <table style="width: 100%" class = "table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Party</th>
-                <th>State</th>
-                <th>Years in Office</th>
-                <th>% Votes w/ Party</th>
-            </tr>
-        </thead>
-        <tbody id="senate-data">
+</body>
 
-        </tbody>
-    </table>
-    </div>
-
-
- <script type="text/javascript" src="pro-congress-113-senate.js"></script>
-
-
-</body></html>
+</html>

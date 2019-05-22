@@ -117,13 +117,14 @@ function membersNumber(allMembers) {
             var votesWithIndNumber = parseFloat(arrayVotesWparty[i]);
             votesWithInd += votesWithIndNumber;
         }
+        
     }
 
     var total = (totalDem + totalRep + totalInd)
     var totalPctWithParty = ((votesWithDem + votesWithRep + votesWithInd) / total).toFixed(2) + "%";
     var pctWithDem = (votesWithDem / totalDem).toFixed(2) + "%";
     var pctWithRep = (votesWithRep / totalRep).toFixed(2) + "%";
-    var pctWithInd = (votesWithInd / totalInd).toFixed(2) + "%";
+    var pctWithInd = ((votesWithInd / totalInd).toFixed(2) + "%");
     statistics.totalDem = totalDem;
     statistics.totalRep = totalRep;
     statistics.totalInd = totalInd;
@@ -132,6 +133,8 @@ function membersNumber(allMembers) {
     statistics.votesWithRep = pctWithRep;
     statistics.votesWithInd = pctWithInd;
     statistics.totalVotesWith = totalPctWithParty;
+    
+
 }
 //membersNumber
 
@@ -173,8 +176,8 @@ function allFunctions(allMembers) {
     for (i = 0; i < tenPctOfAll; i++) {
         mostLoyalArrayTen.push(arrayMostLoyalTotal[i]);
     }
-    //console.log(arrayMostLoyalTotal)
-    //console.log(mostLoyalArrayTen)
+//    console.log(arrayMostLoyalTotal)
+//    console.log(mostLoyalArrayTen)
 
 
 
@@ -212,8 +215,7 @@ function allFunctions(allMembers) {
         mostEngagedArrayTen.push(arrayMostEngagedTotal[i]);
     }
     //console.log(arrayMostEngagedTotal)
-    //console.log(mostEngagedArrayTen)
-
+//    console.log(mostEngagedArrayTen)
 
 
     // CAlculate 10% LEAST ENGAGED---------
@@ -251,11 +253,75 @@ function allFunctions(allMembers) {
 
 
 
-    // fill least engage table ----------
+    // If function to select which betweem Engagment or loyalty tables to be executed
+    
+    function selectTable() {
+    
+        
+        
+        switch (window.location.pathname) {
+            case ("/Senate_attendance_statistics.html" ) :
+                console.log("1");
+                leastEngagedTable();
+                mostEngagedTable();
+                break;
+            case ("/House_attendance_statistics.html") :
+                console.log("2");
+                leastEngagedTable();
+                mostEngagedTable();
+                break;
+            case ("/Senate_loyalty_statistics.html") :
+                console.log("3");
+                leastLoyalTable();
+                mostLoyalTable();
+                break;
+            case ("/House_loyalty_statistics.html") :
+                console.log("4");
+                leastLoyalTable();
+                mostLoyalTable();
+                break;
+            default :
+                console.log("Something went wrong");
+
+        }
+        
+    //Con IFs no funciona. ...tengo que preguntar porque.
+//    if (window.location.pathname == "/Senate_attendance_statistics.html" ) {        
+//        console.log("1"); 
+//        leastEngagedTable();
+//        
+//        }
+//     if (window.location.pathname == "/House_attendance_statistics.html") {
+//        console.log("2");
+//            mostEngagedTable();
+//        }
+//         if (window.location.pathname == "/Senate_loyalty_statistics.html") {
+//            console.log("3");            
+//            leastLoyalTable;
+//        }
+//        
+//            
+//    
+//         if (window.location.pathname == "/House_loyalty_statistics.html" ) 
+//         {
+//         
+//            console.log("4");
+//            mostLoyalTable;
+//        }
+
+    }
+    
+    selectTable()
 
 
 
-    function leastEngagedTable() {
+
+    
+    
+    
+    };
+
+function leastEngagedTable() {
         var tbody = document.getElementById("leastEngaged")
         tbody.innerHTML = '';
         var statisticsLE = statistics.least_engaged;
@@ -271,7 +337,7 @@ function allFunctions(allMembers) {
 
 
             cell2.innerHTML = statisticsLE[i].missed_votes;
-            cell3.innerHTML = statisticsLE[i].missed_votes_pct + "%"; //DUDA inicialmente ponia =allmembers[i].first_name, etc.. y listaba los de Most Engage
+            cell3.innerHTML = statisticsLE[i].missed_votes_pct + "%"; 
 
             nameLink.setAttribute('href', statisticsLE[i].url);
             cell1.appendChild(nameLink);
@@ -284,11 +350,11 @@ function allFunctions(allMembers) {
 
         }
     }
-    leastEngagedTable()
+    
 
     function mostEngagedTable() {
         var tbody = document.getElementById("mostEngaged")
-
+        tbody.innerHTML = '';
         var statisticsME = statistics.most_engaged;
 
         for (i = 0; i < statisticsME.length; i++) {
@@ -313,8 +379,67 @@ function allFunctions(allMembers) {
 
         }
     }
-    mostEngagedTable()
+    
 
-};
 
-////// LOY
+    
+    
+
+    function leastLoyalTable() {
+        var tbody = document.getElementById("leastLoyal")
+        tbody.innerHTML = '';
+        var statisticsLeastLoyal = statistics.least_loyal;
+
+        for (i = 0; i < statisticsLeastLoyal.length; i++) {
+            var row = document.createElement("tr");
+            var cell1 = document.createElement("td");
+            var cell2 = document.createElement("td");
+            var cell3 = document.createElement("td");
+            var nameLink = document.createElement('a');
+
+            nameLink.innerHTML = statisticsLeastLoyal[i].first_name + " " + (statisticsLeastLoyal[i].middle_name || " ") + " " + statisticsLeastLoyal[i].last_name;
+
+
+            cell2.innerHTML = ((statisticsLeastLoyal[i].total_votes * statisticsLeastLoyal[i].votes_with_party_pct) /100).toFixed(0);
+            cell3.innerHTML = statisticsLeastLoyal[i].votes_with_party_pct + "%"; 
+
+            nameLink.setAttribute('href', statisticsLeastLoyal[i].url);
+            cell1.appendChild(nameLink);
+            row.appendChild(cell1);
+            row.appendChild(cell2);
+            row.appendChild(cell3);
+
+            tbody.appendChild(row);
+
+
+        }
+    }
+    
+
+    function mostLoyalTable() {
+        var tbody = document.getElementById("mostLoyal")
+        tbody.innerHTML = '';
+        var statisticsMostLoyal = statistics.most_loyal;
+
+        for (i = 0; i < statisticsMostLoyal.length; i++) {
+            var row = document.createElement("tr");
+            var cell1 = document.createElement("td");
+            var cell2 = document.createElement("td");
+            var cell3 = document.createElement("td");
+            var nameLink = document.createElement('a');
+
+            nameLink.innerHTML = statisticsMostLoyal[i].first_name + " " + (statisticsMostLoyal[i].middle_name || " ") + " " + statisticsMostLoyal[i].last_name;
+            cell2.innerHTML = ((statisticsMostLoyal[i].total_votes * statisticsMostLoyal[i].votes_with_party_pct) /100).toFixed(0);
+            cell3.innerHTML = statisticsMostLoyal[i].votes_with_party_pct + "%";
+
+            nameLink.setAttribute('href', statisticsMostLoyal[i].url);
+            cell1.appendChild(nameLink);
+            row.appendChild(cell1);
+            row.appendChild(cell2);
+            row.appendChild(cell3);
+
+            tbody.appendChild(row);
+
+
+        }
+    }
